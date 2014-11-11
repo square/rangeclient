@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.email       = ["evan@squareup.com"]
   s.summary     = "Simple range client for ruby."
   s.description = "Use with range from https://github.com/square/libcrange"
-  s.homepage    = "https://github.com/square/prodeng/tree/master/ruby_rangeclient"
+  s.homepage    = "https://github.com/square/rangeclient"
 
   s.required_rubygems_version = ">= 1.3.6"
 
