@@ -14,3 +14,5 @@
     # use ranged to compress the array of hostnames into a range expression
     # [ foo10, foo11, foo12 ] => "foo10..12"
     range_exp = r.compress(hosts)
+
+Imported from [https://github.com/square/prodeng](https://github.com/square/prodeng/commit/524dce7d1e81c347129c45491a107c690a071abf).
