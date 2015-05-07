@@ -23,7 +23,7 @@ class Range::Client
     @port = ENV['RANGE_PORT'] if ENV.has_key?('RANGE_PORT')
     @port = options[:port] if options.member?(:port)
 
-    @ssl  = ENV['RANGE_SSL'] || options[:ssl]
+    @ssl  = true if ENV['RANGE_SSL'] =~ (/(1|true)/i) || options[:ssl]
 
     @timeout = 60
     @timeout = options[:timeout] if options.member?(:timeout)
