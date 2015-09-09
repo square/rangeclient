@@ -7,6 +7,9 @@ require 'uri'
 class Range::Client
   attr_accessor :host, :port, :timeout, :rangeexception
 
+  class QueryException < Exception
+  end
+
   # used to split hostnames into component parts for compression
   @@NodeRegx = /
                  ([-\w.]*?)                                # $1 - prefix
@@ -37,6 +40,7 @@ class Range::Client
     http.use_ssl = @ssl
     req = Net::HTTP::Get.new('/range/list?' + escaped_arg)
     resp = http.request(req)
+    raise QueryException.new(resp.body) unless resp.is_a?(Net::HTTPSuccess)
     @rangeexception = resp['rangeexception']
     return resp.body.split "\n"
   end
