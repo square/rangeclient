@@ -7,7 +7,7 @@ require 'uri'
 class Range::Client
   attr_accessor :host, :port, :timeout, :rangeexception
 
-  class QueryException < Exception
+  class QueryException < StandardError
   end
 
   # used to split hostnames into component parts for compression
@@ -85,7 +85,7 @@ class Range::Client
       if r=~ /,/
         r = "{#{r}}"
       end
-      result << "#{r}.#{domain}" 
+      result << "#{r}.#{domain}"
     end
     return result.join ","
   end
@@ -135,7 +135,7 @@ class Range::Client
         count += 1
         next
       end
-      
+
       if prev_n
         if count > 0
           result << _get_group(prev_prefix, prev_digits, count, prev_suffix)
@@ -181,7 +181,7 @@ class Range::Client
     prefix = "" if prefix.nil?
     group = sprintf("%s%0*d..%s",
                     prefix,
-                    digits.to_s.length, 
+                    digits.to_s.length,
                     digits.to_i,   # sometimes has leading zeroes
                     _ignore_common_prefix(digits, (digits.to_i + count).to_s)
                     )
