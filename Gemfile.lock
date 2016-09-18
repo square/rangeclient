@@ -1,0 +1,16 @@
+PATH
+  remote: .
+  specs:
+    rangeclient (0.0.13)
+      net-http-pipeline (~> 1.0.1)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    net-http-pipeline (1.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rangeclient!

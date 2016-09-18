@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'net/http'
+require 'net/http/pipeline'
 require 'uri'
 
 class Range::Client
@@ -43,6 +44,33 @@ class Range::Client
     raise QueryException.new(resp.body) unless resp.is_a?(Net::HTTPSuccess)
     @rangeexception = resp['rangeexception']
     return resp.body.split "\n"
+  end
+
+  def multiexpand(*args)
+    result = []
+    http = Net::HTTP.new(@host, @port)
+    http.read_timeout = @timeout
+    http.use_ssl = @ssl
+    http.start do |http|
+      reqs = args.map do |arg|
+        escaped_arg = URI.escape arg
+        req = Net::HTTP::Get.new('/range/list?' + escaped_arg)
+      end
+      begin
+        http.pipeline(reqs) do |resp|
+          @rangeexception ||= resp['rangeexception']
+          result << resp.body.split("\n")
+        end
+      rescue Net::HTTP::Pipeline::PersistenceError
+        # Pipelining not supported, fallback to sequential requests.
+        reqs.each do |req|
+          resp = http.request(req)
+          @rangeexception ||= resp['rangeexception']
+          result << resp.body.split("\n")
+        end
+      end
+    end
+    result
   end
 
 

@@ -17,5 +17,6 @@ Gem::Specification.new do |s|
   s.files        = Dir.glob("lib/**/*") + Dir.glob("bin/*") + %w(README.md)
   s.extra_rdoc_files = ["LICENSE.md"]
   s.rdoc_options = ["--charset=UTF-8"]
+  s.add_dependency 'net-http-pipeline', '~> 1.0', '>= 1.0.1'
 end
 
