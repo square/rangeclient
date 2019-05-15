@@ -1,6 +1,5 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
-require 'rubygems'
 require 'rangeclient'
 
 first_range = ARGV.shift

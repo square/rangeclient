@@ -1,6 +1,5 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
-require 'rubygems'
 require 'rangeclient'
 
 require 'optparse'
@@ -10,13 +9,13 @@ options = {
 }
 optparse = OptionParser.new do |opts|
   opts.on('-e', '--expand', 'Print one element per line') do |arg|
-    options[:expand] = arg 
+    options[:expand] = arg
   end
   opts.on('-c', '--count', 'Print the count of range elements, not the range itself') do |arg|
-    options[:count] = arg 
+    options[:count] = arg
   end
   opts.on('-s', '--sort', 'Sort expanded output') do |arg|
-    options[:sorted] = arg 
+    options[:sorted] = arg
   end
   opts.on('-v', '--vip range:80', 'Which host or host:port to query') do |arg|
     host, port = arg.split(':', 2)
@@ -24,7 +23,7 @@ optparse = OptionParser.new do |opts|
     options[:port] = port unless port.nil?
   end
   opts.on('-p', '--port 80', 'Port to use when connecting') do |arg|
-    options[:port] = arg 
+    options[:port] = arg
   end
   opts.on('-t', '--timeout TIMEOUT', "Wait this long for a response") do |arg|
     options[:timeout] = arg.to_i

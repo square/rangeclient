@@ -1,9 +1,9 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
+
 # given a range and N buckets, slice the range
 # into N buckets, attempting even bucket distribution
 # based on hostname
 
-require 'rubygems'
 require 'rangeclient'
 
 range_arg = ARGV.shift;
