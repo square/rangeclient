@@ -1,0 +1,17 @@
+PATH
+  remote: .
+  specs:
+    rangeclient (0.0.17)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rangeclient!
+
+BUNDLED WITH
+   1.17.2
