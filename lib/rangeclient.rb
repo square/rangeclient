@@ -29,6 +29,9 @@ class Range::Client
     @ssl = ENV['RANGE_SSL'] =~ (/(1|true)/i)
     @ssl = options[:ssl] if options.member?(:ssl)
 
+    @ca_file = ENV['RANGE_CA_FILE'] if ENV.has_key?('RANGE_CA_FILE')
+    @ca_file = options[:ca_file] if options.member?(:ca_file)
+
     @timeout = 60
     @timeout = options[:timeout] if options.member?(:timeout)
   end
@@ -37,7 +40,10 @@ class Range::Client
     escaped_arg = URI.escape arg
     http = Net::HTTP.new(@host, @port)
     http.read_timeout = @timeout
-    http.use_ssl = @ssl
+    if @ssl
+      http.use_ssl = true
+      http.ca_file = @ca_file
+    end
     req = Net::HTTP::Get.new('/range/list?' + escaped_arg)
     resp = http.request(req)
     raise QueryException.new(resp.body) unless resp.is_a?(Net::HTTPSuccess)
