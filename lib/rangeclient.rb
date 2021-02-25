@@ -2,7 +2,7 @@
 
 require 'rubygems'
 require 'net/http'
-require 'uri'
+require 'erb'
 
 class Range::Client
   attr_accessor :host, :port, :timeout, :rangeexception
@@ -37,7 +37,7 @@ class Range::Client
   end
 
   def expand(arg)
-    escaped_arg = URI.escape arg
+    escaped_arg = ERB::Util.url_encode arg
     http = Net::HTTP.new(@host, @port)
     http.read_timeout = @timeout
     if @ssl
