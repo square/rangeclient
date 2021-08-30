@@ -2,7 +2,7 @@
 
 require 'rubygems'
 require 'net/http'
-require 'erb'
+require 'uri'
 
 class Range::Client
   attr_accessor :host, :port, :timeout, :rangeexception
