@@ -37,7 +37,7 @@ class Range::Client
   end
 
   def expand(arg)
-    escaped_arg = URI.escape arg
+    escaped_arg = URI.encode_www_form_component arg
     http = Net::HTTP.new(@host, @port)
     http.read_timeout = @timeout
     if @ssl
